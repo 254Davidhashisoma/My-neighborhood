@@ -8,7 +8,7 @@ from django.views import generic
 # Create your views here.
 def home(request):
     neighbourhoods = Neighbourhood.objects.all()
-    return render(request, 'home.html',{"neighbourhoods":neighbourhoods,})
+    return render(request, 'index.html',{"neighbourhoods":neighbourhoods,})
 
 
 @login_required(login_url='/accounts/login/')
