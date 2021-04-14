@@ -1,34 +1,55 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
 
-# Create your models here.
-class Neighborhood(models.Model):
-    name = models.CharField(blank=True, max_length=120)
-    location = models.CharField(blank=True, max_length=120)
-    admin = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='hood')
-    hood_logo = CloudinaryField('gallery/')
-    occupants_count = models.PositiveIntegerField(default = '0')
-    description = models.TextField()
-    health_department = models.IntegerField(null=True, blank=True)
-    police_number = models.IntegerField(null=True, blank=True) 
 
-    @classmethod
-    def find_neighborhood(cls, neighborhood_id):
-        return cls.objects.filter(id=neighborhood_id)
+class Neighbourhood(models.Model):
+    name=models.CharField(max_length=60)
+    location=models.CharField(max_length=60)
+    population=models.IntegerField()
+    image = models.ImageField(upload_to = 'images/')
 
-    def save_post(self):
+    def create_neigborhood(self):
         self.save()
 
-    @classmethod
-    def update_post(cls,old,new):
-        cap = Neighborhood.objects.filter(description=old).update(description=new)
-        return cap
-
-    def delete_post(self):
+    def delete_neigborhood(self):
         self.delete()
 
     @classmethod
-    def search_business(cls, name):
-        return cls.objects.filter(name__icontains=name).all()
+    def search_by_name(cls,search_term):
+        neighborhood=cls.objects.filter(name__icontains=search_term)
+        return neighborhood
+
+
+class Profile(models.Model):
+    image=models.ImageField(default='default.jpg', upload_to='profile_pics')
+    bio=models.CharField(max_length=300)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.name} hood'
+        return f'{self.user.username} Profile'
+
+    def create_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+
+
+class Business(models.Model):
+    name=models.CharField(max_length=60)
+    description=models.CharField(max_length=200)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    neighborhood=models.ForeignKey(Neighbourhood,on_delete=models.CASCADE)
+    email=models.EmailField()
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+class Post(models.Model):
+    post=models.CharField(max_length=200)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    neighborhood=models.ForeignKey(Neighbourhood,on_delete=models.CASCADE)
