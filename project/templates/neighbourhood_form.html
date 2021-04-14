@@ -14,6 +14,7 @@
   {%block content%}
   <form action="{% url 'home' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    {{ form|crispy }}
     {% bootstrap_form neighbourform %}
     <a href="{% url 'home' %}"><button type="submit">Upload</button></a>
   </form>

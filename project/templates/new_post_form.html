@@ -18,6 +18,7 @@
 
     <form action="{%url 'new_post' neighborhood.id %}" method="post" enctype="multipart/form-data">
         {%csrf_token%}
+        {{ form|crispy }}
 
         {% bootstrap_form form%}
         <input type="submit" class="btn btn-success btn-lg" value="Post">
