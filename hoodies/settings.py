@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'cloudinary'
+    'cloudinary',
     'crispy_forms',
     'project',
     'django.contrib.admin',
