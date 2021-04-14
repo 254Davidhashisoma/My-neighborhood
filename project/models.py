@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from django.utils.six import python_2_unicode_compatible
+from six import python_2_unicode_compatible
 
 
 class Neighbourhood(models.Model):
@@ -23,6 +23,7 @@ class Neighbourhood(models.Model):
 
 
 class Profile(models.Model):
+
     image=models.ImageField(default='default.jpg', upload_to='profile_pics')
     bio=models.CharField(max_length=300)
     user = models.OneToOneField(User,on_delete=models.CASCADE)
