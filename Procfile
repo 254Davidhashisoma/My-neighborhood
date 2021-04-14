@@ -1,1 +1,1 @@
-web: gunicorn webinnar.wsgi
+web: gunicorn hoodies.wsgi
