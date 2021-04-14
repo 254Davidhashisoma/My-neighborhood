@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.six import python_2_unicode_compatible
 
 
 class Neighbourhood(models.Model):
