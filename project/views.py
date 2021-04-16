@@ -12,13 +12,13 @@ def home(request):
     return render(request, 'index.html',{"neighbourhoods":neighbourhoods,})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/registration/login/')
 def neighbourhood(request):
     neighbourhoods = Neighbourhood.objects.all()
     return render(request,'home.html',{"neighbourhoods":neighbourhoods})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/registration/login/')
 def profile(request):
     current_user = request.user
     profile = Profile.objects.all()
@@ -45,7 +45,7 @@ def profile(request):
     return render(request, 'registration/profile.html',locals())
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/registration/login/')
 def addneighbourhood(request):
     neighbourform = NeighbourhoodForm()
     neighbourform.owner = request.user
@@ -67,7 +67,7 @@ def neighbourhood_details(request,neighbourhood_id):
     return render(request,'details.html',{'neighbourhood':neighbourhood,'businesses':businesses,'posts':posts})
 
 
-@login_required(login_url="/accounts/login/")
+@login_required(login_url="/registration/login/")
 def new_business(request,pk):
     current_user = request.user
     neighborhood = get_object_or_404(Neighbourhood,pk=pk)
@@ -84,7 +84,7 @@ def new_business(request,pk):
         business_form = NewBusinessForm()
     return render(request, 'new_business_form.html', {"form": business_form,'neighborhood':neighborhood})
 
-@login_required(login_url="/accounts/login/")
+@login_required(login_url="/registration/login/")
 def new_post(request,pk):
     current_user = request.user
     neighborhood = get_object_or_404(Neighbourhood,pk=pk)
