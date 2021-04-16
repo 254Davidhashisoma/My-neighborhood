@@ -40,7 +40,7 @@ No known Bugs
 * PYTHON
 * DJANGO
 ## Support and contact details
-lewismaybach@gmail.com
+davidhashisoma95@gmail.com
 ### License
 *MIT License.  See below for more details on licensing. https://opensource.org/licenses/MIT*
 Copyright (c) {2021} **David Hashisoma**
